@@ -4,7 +4,7 @@ import { useDropzone } from "react-dropzone";
 
 export default function UploadZone({ onFileSelected }) {
   const onDrop = useCallback((acceptedFiles) => {
-    onFileSelected(acceptedFiles[0]);   // remonte le fichier au parent
+    onFileSelected(acceptedFiles[0]);
   }, [onFileSelected]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -18,7 +18,7 @@ export default function UploadZone({ onFileSelected }) {
       <input {...getInputProps()} />
       {isDragActive
         ? <p>Déposez le PDF ici…</p>
-        : <p>Glissez votre CV PDF, ou cliquez pour choisir</p>}
+        : <p>Glissez votre CV (format PDF), ou cliquez pour choisir</p>}
     </div>
   );
 }
