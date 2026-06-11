@@ -58,7 +58,8 @@ export async function analyzeCV(text: string): Promise<AnalysisResult> {
 			{role: "system", content: SYSTEM_PROMPT},
 			{role: "user", content: text}
 		],
-		response_format: {type: "json_object"}
+		response_format: {type: "json_object"},
+		temperature: 0.2
 	})
 
 	const content = response.choices[0].message.content ?? "{}"
@@ -73,7 +74,8 @@ export async function matchCV(cvText: string, jobDescription: string): Promise<M
 			{role: "system", content: MATCH_PROMPT},
 			{role: "user", content: userContent}
 		],
-		response_format: {type: "json_object"}
+		response_format: {type: "json_object"},
+		temperature: 0.2
 	})
 
 	const content = response.choices[0].message.content ?? "{}"

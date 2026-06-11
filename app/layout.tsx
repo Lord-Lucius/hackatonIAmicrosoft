@@ -13,8 +13,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CV Analyzer",
-  description: "Analyse intelligente de CV et matching avec une offre d'emploi",
+  title: "CV Analyzer — Agent IA",
+  description:
+    "Agent IA qui analyse un CV (résumé, niveau, compétences, forces et lacunes, métiers recommandés) et calcule son adéquation avec une offre d'emploi.",
 };
 
 export default function RootLayout({
