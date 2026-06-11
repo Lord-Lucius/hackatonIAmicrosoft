@@ -3,7 +3,7 @@
 import MatchingPanel from "@/components/MatchingPanel";
 import UploadZone from "@/components/UploadZone";
 import { useState, useEffect } from "react";
-import type { MatchResult } from "@/types/analysis";
+import type { AnalysisResult, MatchResult } from "@/types/analysis";
 
 export default function Home() {
 	const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle")
@@ -11,9 +11,9 @@ export default function Home() {
 	const [cvText, setCvText] = useState("")
 	const [job, setJob] = useState("")
 	const [match, setMatch] = useState<MatchResult | null>(null)
+	const [analysis, setAnalysis] = useState<AnalysisResult | null>(null)
 
 	useEffect(() => {
-		console.log("useEffect anti-drop monté");   // ← ajoute ça
 		const prevent = (e: DragEvent) => e.preventDefault();
 		window.addEventListener("dragover", prevent);
 		window.addEventListener("drop", prevent);
@@ -24,15 +24,12 @@ export default function Home() {
 	}, []);
 
 	async function handleCompare() {
-		console.log("CV envoyé:", cvText);
-		console.log("Offre envoyée:", job);
 		const res = await fetch("/api/match", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ cv_text: cvText, job_description: job })
 		})
 		const data = await res.json()
-		console.log("Résultat match:", data)
 		setMatch(data)
 	}
 
@@ -45,6 +42,7 @@ export default function Home() {
 			const data = await res.json()
 			setResult(data.text)
 			setCvText(data.text)
+			setAnalysis(data.analyze)
 			setStatus("done")
 		} catch(error) {
 			setStatus("error")

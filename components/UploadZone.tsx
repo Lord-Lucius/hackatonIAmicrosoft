@@ -2,8 +2,8 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
-export default function UploadZone({ onFileSelected }) {
-const onDrop = useCallback((acceptedFiles: any[]) => {
+export default function UploadZone({ onFileSelected }: { onFileSelected: (file: File) => void }) {
+const onDrop = useCallback((acceptedFiles: File[]) => {
 	onFileSelected(acceptedFiles[0]);
 }, [onFileSelected]);
 

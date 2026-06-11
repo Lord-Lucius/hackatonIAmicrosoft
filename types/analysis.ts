@@ -3,7 +3,7 @@ export interface AnalysisResult {
 	level: "junior" | "intermediate" | "senior";
 	level_reason: string;
 	skills: string[];
-	strenghs: string[];
+	strengths: string[];
 	weaknesses: string[];
 	recommended_jobs: string[];
 }

@@ -1,5 +1,4 @@
 import { matchCV } from "@/lib/llm-client";
-import { Console } from "console";
 
 export async function POST(request: Request) {
 	const {cv_text, job_description} = await request.json()
