@@ -24,12 +24,15 @@ export default function Home() {
 	}, []);
 
 	async function handleCompare() {
+		console.log("CV envoyé:", cvText);
+		console.log("Offre envoyée:", job);
 		const res = await fetch("/api/match", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ cv_text: cvText, job_description: job })
 		})
 		const data = await res.json()
+		console.log("Résultat match:", data)
 		setMatch(data)
 	}
 
