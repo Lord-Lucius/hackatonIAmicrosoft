@@ -9,8 +9,8 @@ export interface AnalysisResult {
 }
 
 export interface MatchResult {
-	match_score: number;
-	match_skilled: string[];
-	missing_skills: string[];
-	recommendation: string;
+  match_score: number;
+  matched_skills: string[];
+  missing_skills: string[];
+  recommendation: string;
 }

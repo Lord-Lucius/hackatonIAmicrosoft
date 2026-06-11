@@ -20,7 +20,7 @@ return (
 		<div>
 		<h3 className="text-green-500 font-semibold mb-2">Compétences présentes</h3>
 		<ul>
-			{result.match_skilled.map((skill) => (
+			{result.matched_skills.map((skill) => (
 			<li key={skill}>{skill}</li>
 			))}
 		</ul>
@@ -29,7 +29,7 @@ return (
 		<div>
 		<h3 className="text-red-500 font-semibold mb-2">Compétences manquantes</h3>
 		<ul>
-			{result.missing_skills.map((skill) => (
+			{result.matched_skills.map((skill) => (
 			<li key={skill}>{skill}</li>
 			))}
 		</ul>
