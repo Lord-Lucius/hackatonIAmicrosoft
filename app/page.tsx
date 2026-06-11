@@ -4,6 +4,10 @@ import MatchingPanel from "@/components/MatchingPanel";
 import UploadZone from "@/components/UploadZone";
 import { useState, useEffect } from "react";
 import type { AnalysisResult, MatchResult } from "@/types/analysis";
+import SummaryCard from "@/components/SummaryCard";
+import SkillsTags from "@/components/SkillsTags";
+import StrengthWeaknessList from "@/components/StrengthWeaknessList";
+import JobSuggestions from "@/components/JobSuggestions";
 
 export default function Home() {
 	const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle")
@@ -55,24 +59,38 @@ export default function Home() {
 			{status === "loading" && <p>Processing data</p>}
 			{status === "error" && <p>An error has occured</p>}
 
-			{status === "done" && (
-			<div className="w-full max-w-3xl flex flex-col items-center gap-6">
-				<pre className="whitespace-pre-wrap text-left w-full">{result}</pre>
+			{status === "done" && analysis && (
+				<div className="w-full max-w-3xl flex flex-col items-center gap-6 p-8">
+					<h1 className="text-2xl font-bold">Analyse du CV</h1>
 
-				<section className="w-full flex flex-col items-center mt-8">
+					<SummaryCard analysis={analysis} />
+					<SkillsTags skills={analysis.skills} />
+					<StrengthWeaknessList
+					strengths={analysis.strengths}
+					weaknesses={analysis.weaknesses}
+					/>
+					<JobSuggestions jobs={analysis.recommended_jobs} />
+
+					<section className="w-full flex flex-col items-center mt-8">
+					<h2 className="text-xl font-bold mb-3">Comparer à une offre</h2>
 					<textarea
 						value={job}
 						onChange={(e) => setJob(e.target.value)}
 						placeholder="Collez l'offre d'emploi ici"
-						className="w-full h-40 rounded-xl p-3 bg-slate-800"
+						className="w-full h-40 rounded-xl p-3"
+						style={{ background: "var(--surface)", color: "var(--text)" }}
 					/>
-					<button onClick={handleCompare} className="mt-3 px-4 py-2 rounded-xl bg-indigo-500">
+					<button
+						onClick={handleCompare}
+						className="mt-3 px-4 py-2 rounded-xl font-semibold"
+						style={{ background: "var(--accent)", color: "#fff" }}
+					>
 						Comparer
 					</button>
 
 					{match && <MatchingPanel result={match} />}
-				</section>
-			</div>
+					</section>
+				</div>
 			)}
 		</main>
 	)
